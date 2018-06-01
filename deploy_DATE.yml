@@ -1,0 +1,14 @@
+---
+- hosts: web
+  gather_facts: yes
+  remote_user: edureka
+  tasks: 
+  - name: install telnet app
+    apt: name=telnet state=present
+
+  - name: check if lynx is installed
+    raw: 'dpkg -l | grep lynx'
+    register: lynx_status
+
+  - debug:
+      var: lynx_status
