@@ -1,0 +1,20 @@
+---
+# My first playbook...
+- hosts: web
+  remote_user: edureka
+  gather_facts: no
+  connection: local
+  vars_files:
+  - ../conf/webdefaults.yml
+  vars:
+    playbook_version: 1.0
+  tasks:
+  - name: print date and copy to a file
+    raw: timedatectl >> /home/edureka/date.txt
+    register: tdvar
+  - debug: var=tdvar
+  - name: install Apache server
+    apt:
+     name: fail2ban
+     state: present
+
